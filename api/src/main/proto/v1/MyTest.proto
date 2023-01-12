@@ -1,0 +1,47 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+import "google/protobuf/struct.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/api/field_behavior.proto";
+import "google/api/protoc-gen-openapiv2/options/annotations.proto";
+
+option java_multiple_files = true;
+option java_package = "my.test.grpc.v1";
+option java_outer_classname = "MyTest";
+
+package my.test;
+
+/* SERVICES DEFINITION */
+
+service MyTest {
+
+  //a description of the endpoint
+  rpc CreateProcedure(DummyRequest) returns (DummyResponse){
+    option (google.api.http) = {
+      post: "/my/test"
+      body: "*"
+    };
+
+    option (google.api.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "A bit of everything"
+        description: "Intentionaly complicated message type to cover many features of Protobuf."
+      }
+      external_docs: {
+        url: "https://github.com/grpc-ecosystem/grpc-gateway";
+        description: "Find out more about ABitOfEverything";
+      }
+      example: "{\"uuid\": \"0cf361e1-4b44-483d-a159-54dabdf7e814\"}"
+    };
+  }
+
+}
+
+message DummyRequest {
+  string dummy_field = 1;
+}
+
+message DummyResponse {
+  string dummy_field = 1;
+}

@@ -1,0 +1,2004 @@
+swagger: "2.0"
+info:
+  title: v1/MyTest.proto
+  version: version not set
+tags:
+  - name: CustomerOnboardingService
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /customer-onboarding-service/status:
+    get:
+      summary: heath check of microservice
+      operationId: CustomerOnboardingService_GetStatus
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingStatusReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - CustomerOnboardingService
+  /domains:
+    get:
+      summary: provides questions and possible answers for saveMifid
+      operationId: CustomerOnboardingService_GetEntireDomainInfo
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingGetEntireDomainInfoResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - CustomerOnboardingService
+  /maintenance/timeframe:
+    get:
+      summary: returns the status of the Welcome API
+      operationId: CustomerOnboardingService_GetWelcomeStatus
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingWelcomeStatusReply'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      tags:
+        - CustomerOnboardingService
+  /prospects/account:open:
+    post:
+      summary: last step of the onboarding, starts the procedure to complete the user's onboarding
+      operationId: CustomerOnboardingService_SetOpenAccount
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingSetOpenAccountRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/address:normalize:
+    post:
+      summary: normalizes the address according to Fideuram's standards
+      operationId: CustomerOnboardingService_NormalizeAddress
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingNormalizedAddress'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingNormalizeAddressRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/check-additional-questions:
+    post:
+      summary: returns whether to show to the user additial mifid questions
+      operationId: CustomerOnboardingService_CheckAdditionalMifidQuestions
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingCheckAdditionalMifidQuestionsResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingCheckAdditionalMifidQuestionsRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}:
+    get:
+      operationId: CustomerOnboardingService_GetFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingGetFlowResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+      tags:
+        - CustomerOnboardingService
+    delete:
+      operationId: CustomerOnboardingService_DeleteFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+      tags:
+        - CustomerOnboardingService
+    post:
+      summary: Resume onboarding
+      operationId: CustomerOnboardingService_CreateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+    head:
+      operationId: CustomerOnboardingService_CheckExistingFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/banco-card-details:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithBancoCardDetails
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/contract-details:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithContractDetails
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/create-procedure:
+    put:
+      operationId: CustomerOnboardingService_CreateProcedureAndUpdateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingCreateProcedureResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingCreateProcedureRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/customer-info:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithCustomerInfo
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/customer-residency:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithCustomerResidency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/identity-document:
+    get:
+      operationId: CustomerOnboardingService_GetIdentityDocument
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingGetIdentityDocumentResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+      tags:
+        - CustomerOnboardingService
+    put:
+      operationId: CustomerOnboardingService_UpdateImageAndFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingUpdateImageRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/mifid:
+    put:
+      operationId: CustomerOnboardingService_SaveMifidAndUpdateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingSaveMifidResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingSaveMifidRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/mifid-question-answers:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithMifidQuestionAnswers
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/normalize-home-address:
+    put:
+      operationId: CustomerOnboardingService_NormalizeHomeAddressAndUpdateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingNormalizedAddress'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingNormalizeAddressRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/normalize-mail-address:
+    put:
+      operationId: CustomerOnboardingService_NormalizeMailAddressAndUpdateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingNormalizedAddress'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingNormalizeAddressRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/open-account:
+    put:
+      operationId: CustomerOnboardingService_SetOpenAccountAndUpdateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingSetOpenAccountRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/pep-us-residency:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithPepUsResidency
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/pep-us-residency-conditions:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithPepUsResidencyConditions
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/personal-data:
+    put:
+      operationId: CustomerOnboardingService_SetPersonalDataAndUpdateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingSetPersonalDataRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/politically-exposed:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithPoliticallyExposed
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/sae-ateco:
+    put:
+      operationId: CustomerOnboardingService_UpdateFlowWithSaeAteco
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                type: object
+      tags:
+        - CustomerOnboardingService
+  /prospects/flows/{deviceId}/verify-otp:
+    put:
+      operationId: CustomerOnboardingService_VerifyOtpCodeAndUpdateFlow
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          type: string
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              payload:
+                $ref: '#/definitions/onboardingVerifyOtpCodeRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/identity-document:
+    post:
+      summary: saves the ID documents of the user
+      operationId: CustomerOnboardingService_UpdateImage
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingUpdateImageRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/mifid:
+    post:
+      summary: saves the responses of the user about the mifid questionnaire
+      operationId: CustomerOnboardingService_SaveMifid
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingSaveMifidResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingSaveMifidRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/otp:send:
+    post:
+      summary: sends an OTP to the user
+      operationId: CustomerOnboardingService_SendOtpCode
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingSendOtpCodeResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingSendOtpCodeRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/otp:verify:
+    post:
+      summary: verifies the OTP the user has provided
+      operationId: CustomerOnboardingService_VerifyOtpCode
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingVerifyOtpCodeRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/personal-data:
+    post:
+      summary: saves user's personal data
+      operationId: CustomerOnboardingService_SetPersonalData
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            type: object
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingSetPersonalDataRequest'
+      tags:
+        - CustomerOnboardingService
+  /prospects/procedures:
+    post:
+      summary: creates a customer's draft in Fideuram's database. If a procedureId is passed in the request, then it retrieves all data of a given customer.
+      operationId: CustomerOnboardingService_CreateProcedure
+      responses:
+        "200":
+          description: A successful response.
+          schema:
+            $ref: '#/definitions/onboardingCreateProcedureResponse'
+        default:
+          description: An unexpected error response.
+          schema:
+            $ref: '#/definitions/rpcStatus'
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/onboardingCreateProcedureRequest'
+      tags:
+        - CustomerOnboardingService
+definitions:
+  onboardingAccountType:
+    type: string
+    enum:
+      - AT_UNSPECIFIED
+      - AT_ACCOUNT_STANDARD
+      - AT_ACCOUNT_TRADING
+    default: AT_UNSPECIFIED
+  onboardingAdeguataverifica:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingAnadoc:
+    type: object
+    properties:
+      allegati:
+        type: integer
+        format: int64
+      descrizione:
+        type: string
+      dominioNag:
+        type: boolean
+      enteEmittente:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      id:
+        type: string
+  onboardingAnswer:
+    type: object
+    properties:
+      answer:
+        type: string
+      value:
+        type: string
+  onboardingAteco:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      descrizioneRidotta:
+        type: string
+      segmentoList:
+        type: array
+        items:
+          type: string
+  onboardingAttivita:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      dominioNag:
+        type: boolean
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingCategoriacliente:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingCategoriacondizioni:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      messaggio:
+        type: string
+      orderList:
+        type: integer
+        format: int64
+  onboardingCheckAdditionalMifidQuestionsRequest:
+    type: object
+    properties:
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      customer:
+        $ref: '#/definitions/onboardingMifidCustomer'
+      questionsAndAnswers:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingQuestionsAndAnswers'
+  onboardingCheckAdditionalMifidQuestionsResponse:
+    type: object
+    properties:
+      showAdditionalMifidQuestions:
+        type: boolean
+  onboardingCircuitipagamento:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+  onboardingClassepatrimonio:
+    type: object
+    properties:
+      codice:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      seiDescrizione:
+        type: string
+      seiDescrizioneEstesa:
+        type: string
+      seiPrivateDescrizione:
+        type: string
+      seiPrivateDescrizioneEstesa:
+        type: string
+  onboardingCoppiadomandarispostamifid:
+    type: object
+    properties:
+      descrDomanda:
+        type: string
+      idDomanda:
+        type: string
+      rispostePossibili:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingRispostepossibili'
+  onboardingCoppiadomandarispostaqavpb:
+    type: object
+    properties:
+      descrDomanda:
+        type: string
+      idDomanda:
+        type: string
+      rispostePossibili:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingRispostepossibili1'
+  onboardingCreateProcedureRequest:
+    type: object
+    properties:
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      email:
+        type: string
+      phoneNumber:
+        type: string
+      prefixPhoneNumber:
+        type: string
+      taxId:
+        type: string
+    required:
+      - taxId
+  onboardingCreateProcedureResponse:
+    type: object
+    properties:
+      abiOriginCode:
+        type: string
+      procedureId:
+        type: string
+  onboardingDeclarations:
+    type: object
+    properties:
+      accountPurposeCode:
+        type: string
+      fiscalTaxId1:
+        type: string
+      fiscalTaxId2:
+        type: string
+      isPep:
+        type: boolean
+      nationCodeFiscalResidency1:
+        type: string
+      nationCodeFiscalResidency2:
+        type: string
+      officesOwnership:
+        type: string
+      originOfFundsCode:
+        type: string
+      usResidency:
+        type: boolean
+  onboardingFiliali:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      descrizioneId:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingFormato:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingGetEntireDomainInfoResponse:
+    type: object
+    properties:
+      adeguataVerifica:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingAdeguataverifica'
+      anaDoc:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingAnadoc'
+      ateco:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingAteco'
+      attivita:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingAttivita'
+      categoriaCliente:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingCategoriacliente'
+      categoriaCondizioni:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingCategoriacondizioni'
+      circuitiPagamento:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingCircuitipagamento'
+      classePatrimonio:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingClassepatrimonio'
+      coppiaDomandaRispostaMifid:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingCoppiadomandarispostamifid'
+      coppiaDomandaRispostaQavPb:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingCoppiadomandarispostaqavpb'
+      filiali:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingFiliali'
+      formato:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingFormato'
+      iniziativeCommerciali:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingIniziativecommerciali'
+      listaBanche:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingListabanche'
+      listaIsin:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingListaisin'
+      livelloAgevolazione:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingLivelloagevolazione'
+      livelloAgevolazioneTrim:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingLivelloagevolazionetrim'
+      localita:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingLocalita'
+      mezzoConsegna:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingMezzoconsegna'
+      modalitaCo:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingModalitaco'
+      modalitaPagamento:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingModalitapagamento'
+      naturaRapporto:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingNaturarapporto'
+      nazioni:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingNazioni'
+      operatoreTelefonico:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingOperatoretelefonico'
+      ordiniAddebito:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingOrdiniaddebito'
+      origineFondi:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingOriginefondi'
+      periodicita:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingPeriodicita'
+      prefissiInternazionali:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingPrefissiinternazionali'
+      professioni:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingProfessioni'
+      province:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingProvince'
+      rapportoCointestatari:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingRapportocointestatari'
+      rapportoPb:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingRapportopb'
+      relazioneAffari:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingRelazioneaffari'
+      sae:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingSae'
+      scopoRapporto:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingScoporapporto'
+      segmento:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingSegmento'
+      sesso:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingSesso'
+      settori:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingSettori'
+      timestamp:
+        type: string
+        format: uint64
+      titolarita:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingTitolarita'
+      titoloDiStudio:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingTitolodistudio'
+      toponimo:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingToponimo'
+  onboardingGetFlowResponse:
+    type: object
+    properties:
+      bancoCardDetails:
+        type: object
+      contactsCertified:
+        type: boolean
+      contractDetails:
+        type: object
+      createFlow:
+        type: object
+      createProcedure:
+        type: object
+      customerInfo:
+        type: object
+      customerResidency:
+        type: object
+      hasIdentityDocument:
+        type: boolean
+      homeAddress:
+        type: object
+      mailAddress:
+        type: object
+      mifid:
+        type: object
+      mifidQuestionAnswers:
+        type: object
+      pepUsResidency:
+        type: object
+      pepUsResidencyConditions:
+        type: object
+      personalData:
+        type: object
+      politicallyExposed:
+        type: object
+      saeAteco:
+        type: object
+  onboardingGetIdentityDocumentResponse:
+    type: object
+    properties:
+      identityDocument:
+        type: object
+  onboardingIdentityDocument:
+    type: object
+    properties:
+      expiryDate:
+        type: string
+      issueDate:
+        type: string
+      issuePlace:
+        type: string
+      issueProvinceCode:
+        type: string
+      issuedBy:
+        type: string
+      nagStatus:
+        type: string
+      number:
+        type: string
+      typeCode:
+        type: string
+  onboardingIniziativecommerciali:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      isAttivo:
+        type: boolean
+  onboardingListabanche:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      descrizioneRidotta:
+        type: string
+  onboardingListaisin:
+    type: object
+    properties:
+      classe:
+        type: string
+      codice:
+        type: string
+      codiceProdotto:
+        type: string
+      codiceSottoprodotto:
+        type: string
+      descrizione:
+        type: string
+      descrizioneProdotto:
+        type: string
+  onboardingLivelloagevolazione:
+    type: object
+    properties:
+      modalita:
+        type: string
+      percentuale:
+        type: string
+      subProdotto:
+        type: string
+  onboardingLivelloagevolazionetrim:
+    type: object
+    properties:
+      modalita:
+        type: string
+      percentuale:
+        type: string
+      subProdotto:
+        type: string
+  onboardingLocalita:
+    type: object
+    properties:
+      dataFine:
+        type: string
+      dataInizio:
+        type: string
+      id:
+        type: string
+      localita:
+        type: string
+      prov:
+        type: string
+  onboardingMezzoconsegna:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingMifid:
+    type: object
+    properties:
+      questionsAndAnswers:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingQuestionsAndAnswers'
+  onboardingMifidCustomer:
+    type: object
+    properties:
+      birthDate:
+        type: string
+      gender:
+        type: string
+      name:
+        type: string
+      procedureId:
+        type: string
+      surname:
+        type: string
+      taxId:
+        type: string
+  onboardingModalitaco:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingModalitapagamento:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      descrizioneEstesa:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingNaturarapporto:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingNazioni:
+    type: object
+    properties:
+      codice:
+        type: string
+      dataFine:
+        type: string
+      dataInizio:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      flagNazioneNascita:
+        type: integer
+        format: int64
+      isSoloNascita:
+        type: string
+  onboardingNormalizeAddressRequest:
+    type: object
+    properties:
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      address:
+        $ref: '#/definitions/onboardingUserEnteredAddress'
+      procedureId:
+        type: string
+      taxId:
+        type: string
+  onboardingNormalizedAddress:
+    type: object
+    properties:
+      city:
+        type: string
+      forced:
+        type: boolean
+      fraction:
+        type: string
+      normalized:
+        type: boolean
+      notResidentFlag:
+        type: boolean
+      postalCode:
+        type: string
+      province:
+        type: string
+      registeredResidency:
+        type: boolean
+      shortenedAddress:
+        type: string
+      street:
+        type: string
+      streetNumber:
+        type: string
+      toponym:
+        type: string
+  onboardingOperatoretelefonico:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingOpzionipossibili:
+    type: object
+    properties:
+      chiave:
+        type: string
+      valore:
+        type: string
+  onboardingOpzionipossibili1:
+    type: object
+    properties:
+      chiave:
+        type: string
+      valore:
+        type: string
+  onboardingOrdiniaddebito:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+  onboardingOriginefondi:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      descrizioneEstesa:
+        type: string
+      dominioNag:
+        type: boolean
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingPeriodicita:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingPrefissiinternazionali:
+    type: object
+    properties:
+      nazione:
+        type: string
+      prefisso:
+        type: string
+  onboardingProfession:
+    type: object
+    properties:
+      activityNation:
+        type: string
+      activityNatureCode:
+        type: string
+      activityProvince:
+        type: string
+      educationQualification:
+        type: string
+      otherProfession:
+        type: string
+      professionCode:
+        type: string
+  onboardingProfessioni:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      ordinamento:
+        type: integer
+        format: int64
+  onboardingProvince:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      dominioNag:
+        type: boolean
+  onboardingQuestionsAndAnswers:
+    type: object
+    properties:
+      answers:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingAnswer'
+      question:
+        type: string
+  onboardingRapportocointestatari:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+  onboardingRapportopb:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingRelazioneaffari:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      dominioNag:
+        type: boolean
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingRispostepossibili:
+    type: object
+    properties:
+      descrRisposta:
+        type: string
+      idRisposta:
+        type: string
+      opzioniPossibili:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingOpzionipossibili'
+  onboardingRispostepossibili1:
+    type: object
+    properties:
+      descrRisposta:
+        type: string
+      idRisposta:
+        type: string
+      opzioniPossibili:
+        type: array
+        items:
+          $ref: '#/definitions/onboardingOpzionipossibili1'
+  onboardingSae:
+    type: object
+    properties:
+      atecoList:
+        type: array
+        items:
+          type: string
+      codice:
+        type: string
+      descrizione:
+        type: string
+      segmentoList:
+        type: array
+        items:
+          type: string
+  onboardingSaveMifidRequest:
+    type: object
+    properties:
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      birthDate:
+        type: string
+      gender:
+        type: string
+      mifid:
+        $ref: '#/definitions/onboardingMifid'
+      name:
+        type: string
+      procedureId:
+        type: string
+      professionCode:
+        type: string
+      surname:
+        type: string
+      taxId:
+        type: string
+  onboardingSaveMifidResponse:
+    type: object
+    properties:
+      moduleId:
+        type: string
+      riskProfile:
+        type: string
+      token:
+        type: integer
+        format: int32
+  onboardingScoporapporto:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      trasferimentoQuote:
+        type: boolean
+  onboardingSegmento:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      ordinamento:
+        type: integer
+        format: int64
+  onboardingSendOtpCodeRequest:
+    type: object
+    properties:
+      abiOriginCode:
+        type: string
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      email:
+        type: string
+      phoneNumber:
+        type: string
+      prefixPhoneNumber:
+        type: string
+      procedureId:
+        type: string
+      taxId:
+        type: string
+  onboardingSendOtpCodeResponse:
+    type: object
+    properties:
+      tokenId:
+        type: string
+  onboardingServiceStatus:
+    type: string
+    enum:
+      - UP
+      - DOWN
+    default: UP
+  onboardingSesso:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      descrizioneBreve:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingSetOpenAccountRequest:
+    type: object
+    properties:
+      accountOtherPurposeCode:
+        type: string
+      accountPurposeCode:
+        type: string
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      address:
+        $ref: '#/definitions/onboardingNormalizedAddress'
+      bancocardMembership:
+        type: integer
+        format: int32
+      birthDate:
+        type: string
+      birthNation:
+        type: string
+      birthPlace:
+        type: string
+      birthProvince:
+        type: string
+      c3Agreement:
+        type: boolean
+      citizenship:
+        type: string
+      conditionsCategory:
+        type: string
+      customerCategory:
+        type: string
+      educationQualification:
+        type: string
+      email:
+        type: string
+      enableChequebook:
+        type: boolean
+      fideuramPersonalDataAgreement:
+        type: boolean
+      flagsSkipEc:
+        type: string
+      gender:
+        type: string
+      infoBancocardSms:
+        type: boolean
+      isShrd2:
+        type: boolean
+      name:
+        type: string
+      nationality:
+        type: string
+      okeyDevice:
+        type: boolean
+      okeySmart:
+        type: boolean
+      onlineServicesMembership:
+        type: integer
+        format: int32
+      originOfFundsCode:
+        type: string
+      otherOriginOfFundsCode:
+        type: string
+      paymentCircuit:
+        type: string
+      personalDocument:
+        $ref: '#/definitions/onboardingIdentityDocument'
+      preferredPaymentCircuit:
+        type: string
+      procedureId:
+        type: string
+      surname:
+        type: string
+      taxId:
+        type: string
+      telecomProvider:
+        type: string
+      telephoneNumber:
+        type: string
+      telephoneNumberPrefix:
+        type: string
+      thirdPartyDataAgreement:
+        type: boolean
+  onboardingSetPersonalDataRequest:
+    type: object
+    properties:
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      birthDate:
+        type: string
+      birthNation:
+        type: string
+      birthPlace:
+        type: string
+      birthProvince:
+        type: string
+      contractAddress:
+        $ref: '#/definitions/onboardingNormalizedAddress'
+      declarations:
+        $ref: '#/definitions/onboardingDeclarations'
+      email:
+        type: string
+      fideuramPersonalDataAgreement:
+        type: boolean
+      gender:
+        type: string
+      identityDocument:
+        $ref: '#/definitions/onboardingIdentityDocument'
+      mifidModuleId:
+        type: string
+      name:
+        type: string
+      nationality:
+        type: string
+      normalizedAddress:
+        $ref: '#/definitions/onboardingNormalizedAddress'
+      procedureId:
+        type: string
+      profession:
+        $ref: '#/definitions/onboardingProfession'
+      surname:
+        type: string
+      taxId:
+        type: string
+      telephoneNumber:
+        type: string
+      telephoneNumberPrefix:
+        type: string
+      thirdPartyDataAgreement:
+        type: boolean
+  onboardingSettori:
+    type: object
+    properties:
+      codice:
+        type: string
+      codvig:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+      flagFfi:
+        type: string
+  onboardingStatusReply:
+    type: object
+    properties:
+      service:
+        type: string
+      status:
+        $ref: '#/definitions/onboardingServiceStatus'
+  onboardingTitolarita:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingTitolodistudio:
+    type: object
+    properties:
+      codice:
+        type: string
+      codicePdf:
+        type: string
+      descrizione:
+        type: string
+      flagDefault:
+        type: integer
+        format: int64
+  onboardingToponimo:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+  onboardingUpdateImageRequest:
+    type: object
+    properties:
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      expiryDate:
+        type: string
+      imageFormat:
+        type: string
+      imagesBase64:
+        type: string
+      issueDate:
+        type: string
+      issueNation:
+        type: string
+      issuePlace:
+        type: string
+      issueProvinceCode:
+        type: string
+      issuedBy:
+        type: string
+      number:
+        type: string
+      procedureId:
+        type: string
+      taxId:
+        type: string
+      typeCode:
+        type: string
+  onboardingUserEnteredAddress:
+    type: object
+    properties:
+      fraction:
+        type: string
+      locality:
+        type: string
+      postalCode:
+        type: string
+      province:
+        type: string
+      street:
+        type: string
+      streetNumber:
+        type: string
+  onboardingVerifyOtpCodeRequest:
+    type: object
+    properties:
+      accountType:
+        $ref: '#/definitions/onboardingAccountType'
+      otp:
+        type: string
+      taxId:
+        type: string
+      tokenId:
+        type: string
+  onboardingWelcomeStatusReply:
+    type: object
+    properties:
+      currentDate:
+        type: string
+      message:
+        type: string
+      milestone:
+        type: string
+      next:
+        type: string
+      status:
+        $ref: '#/definitions/onboardingServiceStatus'
+  protobufAny:
+    type: object
+    properties:
+      '@type':
+        type: string
+    additionalProperties: {}
+  protobufNullValue:
+    type: string
+    enum:
+      - NULL_VALUE
+    default: NULL_VALUE
+    description: |-
+      `NullValue` is a singleton enumeration to represent the null value for the
+      `Value` type union.
+
+       The JSON representation for `NullValue` is JSON `null`.
+
+       - NULL_VALUE: Null value.
+  rpcStatus:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      details:
+        type: array
+        items:
+          $ref: '#/definitions/protobufAny'
+      message:
+        type: string
